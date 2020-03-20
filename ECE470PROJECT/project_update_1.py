@@ -16,6 +16,9 @@ else:
     print('Connected to remote API server')
 
 theta = [math.pi/4,-1*math.pi/4,math.pi/4,-1*math.pi/4,math.pi/4,-1*math.pi/4]
+
+#theta = [0,0,0,0,0,math.pi/2]
+
 velocities = [1,1,1,1,1,1]
 error_code, POI = sim.simxGetObjectHandle(clientID,'POI',sim.simx_opmode_blocking)
 error_code, UR3_joint1 = sim.simxGetObjectHandle(clientID,'UR3_joint1',sim.simx_opmode_blocking)
@@ -44,7 +47,7 @@ return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint6,theta[5],sim.si
 #sim.simxPauseCommunication(clientID,False)
 
 location = project_helper_func.forward_ur3_kin(theta)
-print('XYZ pos \n',location)
+print('location \n',location)
 XYZ = [location.item(3),location.item(7),location.item(11)]
 sim.simxSetObjectPosition(clientID,POI,-1,XYZ,sim.simx_opmode_blocking)
 
@@ -62,4 +65,4 @@ if(res == 'y'or res ==1):
     return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint4,0,sim.simx_opmode_blocking)
     return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint5,0,sim.simx_opmode_blocking)
     return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint6,0,sim.simx_opmode_blocking)
-    return_code = sim.simxSetObjectPosition(clientID,POI,-1,[-0.2,-0.2,0.1],sim.simx_opmode_blocking)
+    return_code = sim.simxSetObjectPosition(clientID,POI,-1,[-0.2700,0.01,0.652],sim.simx_opmode_blocking)
