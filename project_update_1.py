@@ -33,12 +33,8 @@ if(FvI=='I' or FvI == 'i'):
                                     [ 0.62340519,  0.55988193, -0.5458005,  -0.21503198],\
                                     [ 0.11697778,  0.62340519,  0.77309907,  0.62887313],\
                                     [ 0.0        ,  0.0        ,  0.0        ,  1.0]])
-    thetas = [20, -20, 20, -20, 20, -20]
+    thetas = numpy.array([20, -20, 20, -20, 20, -20])
     theta = project_helper_func.inverseKin(final_endeffector,thetas)
-    #print(theta)
-    for angle in theta:
-        theta_corrected.append( (angle%(2*numpy.pi))*(2*numpy.pi))
-    print(theta_corrected)
 
 velocities = [1,1,1,1,1,1]
 error_code, POI = sim.simxGetObjectHandle(clientID,'POI',sim.simx_opmode_blocking)
