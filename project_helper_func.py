@@ -54,15 +54,15 @@ def forward_ur3_kin(angles):
         print('T_',i,'\n',T[i],'\n')
     print(T[0]@T[1]@T[2]@T[3]@T[4]@T[5])
     '''
-    T_final = T[0]@T[1]@T[2]@T[3]@T[4]@T[5]@M
+    T_final = np.array(T[0]@T[1]@T[2]@T[3]@T[4]@T[5]@M)
     return(T_final)
 
 
 
 def inverseKin(final_endeffector,thetas):
     
-    thetas = thetas*np.pi/180
-    print(thetas)
+    #thetas = thetas*np.pi/180
+    #print(thetas)
     tolerances = 0.001
 
     M =np.array([[1,0,0,-0.2700],\
@@ -93,15 +93,16 @@ def inverseKin(final_endeffector,thetas):
                  [V[0][0],V[0][1],V[0][2],V[0][3],V[0][4],V[0][5]],\
                  [V[1][0],V[1][1],V[1][2],V[1][3],V[1][4],V[1][5]],\
                  [V[2][0],V[2][1],V[2][2],V[2][3],V[2][4],V[2][5]]])
-    print('S=',S,'\n','M=',M,'\n','final_endeffector=',final_endeffector,'\n','tol=',tolerances,'\n',)
+    #print('S=',S,'\n','M=',M,'\n','final_endeffector=',final_endeffector,'\n','tol=',tolerances,'\n',)
     theta,success = mr.IKinSpace(S,M,final_endeffector,thetas,tolerances,tolerances)
     if(success == False):
+        print('S=',S,'\n','M=',M,'\n','final_endeffector=',final_endeffector,'\n','tol=',tolerances,'\n',)
         print('Warning not in tolerances \n ')
         res = input('Continue? y/n:')
         if(res == 'n'):
             print('press ctrl + c')
             while(1):
                 a=1
-    theta_return=np.degrees(theta)
-    print(theta_return)
+    theta_return= theta#np.degrees(theta)
+    #print(theta_return)
     return(theta_return)
