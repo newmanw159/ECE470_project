@@ -63,7 +63,7 @@ def inverseKin(final_endeffector,thetas):
     
     #thetas = thetas*np.pi/180
     #print(thetas)
-    tolerances = 0.001
+    tolerances = 0.0001
 
     M =np.array([[1,0,0,-0.2700],\
                  [0,1,0,0.01],\
