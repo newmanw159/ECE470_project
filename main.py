@@ -7,7 +7,7 @@ import project_helper_func
 
 
 processed_parts = 0
-num_parts = 2 
+num_parts = 1 
 countdown = 100000
 Weld_start = np.radians([0,0,45,10,-90,0])
 zero_loc = np.zeros(6)
