@@ -5,6 +5,8 @@ import sys
 import math
 import project_helper_func
 
+simu= np.empty(28,tuple)
+true= np.empty(28,tuple)
 
 processed_parts = 0
 num_parts = 1 
@@ -31,6 +33,8 @@ error_code, stick = sim.simxGetObjectHandle(clientID,'StickTorch',sim.simx_opmod
 error_code, mig   = sim.simxGetObjectHandle(clientID,'MigTorch',sim.simx_opmode_blocking)
 error_code, tig   = sim.simxGetObjectHandle(clientID,'TigTorch',sim.simx_opmode_blocking)
 error_code, grip   = sim.simxGetObjectHandle(clientID,'BaxterGripper',sim.simx_opmode_blocking)
+
+error_code, Dummy   = sim.simxGetObjectHandle(clientID,'Dummy',sim.simx_opmode_blocking)
 
 return_code = sim.simxSetIntegerSignal(clientID,'BaxterGripper_close',0,sim.simx_opmode_blocking)
 return_code = sim.simxSetIntegerSignal(clientID,'Weld_start',0,sim.simx_opmode_blocking)
@@ -159,6 +163,12 @@ while(processed_parts<num_parts):
         print('waypoint_ang1=',waypoint_ang1)
         print('waypoint1=',waypoint1,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1),'\n')
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[0] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[0] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
+
+
 
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1[1],sim.simx_opmode_blocking)
@@ -180,6 +190,10 @@ while(processed_parts<num_parts):
         print('waypoint_ang1=',waypoint_ang1_1)
         print('waypoint1=',waypoint1_1,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_1),'\n')
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[1] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[1] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
 
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_1[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_1[1],sim.simx_opmode_blocking)
@@ -201,6 +215,10 @@ while(processed_parts<num_parts):
         print('waypoint_ang1=',waypoint_ang1_2)
         print('waypoint1=',waypoint1_2,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_2),'\n')
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[2] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[2] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
 
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_2[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_2[1],sim.simx_opmode_blocking)
@@ -223,6 +241,11 @@ while(processed_parts<num_parts):
         print('waypoint1=',waypoint1_3,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_3),'\n')
 
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[3] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[3] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
+
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_3[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_3[1],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang1_3[2],sim.simx_opmode_blocking)
@@ -243,6 +266,11 @@ while(processed_parts<num_parts):
         print('waypoint_ang1=',waypoint_ang1_4)
         print('waypoint1=',waypoint1_4,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_4),'\n')
+
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[4] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[4] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
 
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_4[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_4[1],sim.simx_opmode_blocking)
@@ -265,6 +293,11 @@ while(processed_parts<num_parts):
         print('waypoint1=',waypoint1_5,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_5),'\n')
 
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+        simu[5] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[5] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
+
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_5[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_5[1],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang1_5[2],sim.simx_opmode_blocking)
@@ -285,6 +318,12 @@ while(processed_parts<num_parts):
         print('waypoint_ang1=',waypoint_ang1_6)
         print('waypoint1=',waypoint1_6,'\n')
         print('calc_waypoint1=',project_helper_func.forward_ur3_kin(waypoint_ang1_6),'\n')
+        temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+
+        simu[6] = (temp[0][3],temp[1][3],temp[2][3])
+
+        return_code,true[6] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
+
 
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang1_6[0],sim.simx_opmode_blocking)
         return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang1_6[1],sim.simx_opmode_blocking)
@@ -307,6 +346,9 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2)
             print('waypoint2=',waypoint2,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[7] = (temp[0][3],temp[1][3],temp[2][3])
+            return_code,true[7] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2[1],sim.simx_opmode_blocking)
@@ -329,6 +371,11 @@ while(processed_parts<num_parts):
             print('waypoint2=',waypoint2_1,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_1),'\n')
 
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[8] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[8] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)
+
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_1[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_1[1],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang2_1[2],sim.simx_opmode_blocking)
@@ -349,6 +396,10 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2_2)
             print('waypoint2=',waypoint2_2,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_2),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[9] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[9] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)           
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_2[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_2[1],sim.simx_opmode_blocking)
@@ -370,6 +421,10 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2_3)
             print('waypoint2=',waypoint2_3,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_3),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[10] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[10] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_3[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_3[1],sim.simx_opmode_blocking)
@@ -391,6 +446,10 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2_4)
             print('waypoint2=',waypoint2_4,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_4),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[11] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[11] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_4[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_4[1],sim.simx_opmode_blocking)
@@ -412,6 +471,10 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2_5)
             print('waypoint2=',waypoint2_5,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_5),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[12] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[12] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_5[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_5[1],sim.simx_opmode_blocking)
@@ -433,6 +496,10 @@ while(processed_parts<num_parts):
             print('waypoint_ang2=',waypoint_ang2_6)
             print('waypoint2=',waypoint2_6,'\n')
             print('calc_waypoint2=',project_helper_func.forward_ur3_kin(waypoint_ang2_6),'\n')
+            temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+            simu[13] = (temp[0][3],temp[1][3],temp[2][3])
+
+            return_code,true[13] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang2_6[0],sim.simx_opmode_blocking)
             return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang2_6[1],sim.simx_opmode_blocking)
@@ -457,6 +524,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3)
                 print('waypoint3=',waypoint3,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[14] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[14] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking) 
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3[1],sim.simx_opmode_blocking)
@@ -479,6 +550,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_1)
                 print('waypoint3=',waypoint3_1,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_1),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[15] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[15] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_1[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_1[1],sim.simx_opmode_blocking)
@@ -500,6 +575,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_2)
                 print('waypoint3=',waypoint3_2,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_2),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[16] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[16] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_2[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_2[1],sim.simx_opmode_blocking)
@@ -521,6 +600,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_3)
                 print('waypoint3=',waypoint3_3,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_3),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[17] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[17] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_3[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_3[1],sim.simx_opmode_blocking)
@@ -542,6 +625,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_4)
                 print('waypoint3=',waypoint3_4,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_4),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[18] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[18] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_4[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_4[1],sim.simx_opmode_blocking)
@@ -563,6 +650,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_5)
                 print('waypoint3=',waypoint3_5,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_5),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[19] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[19] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_5[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_5[1],sim.simx_opmode_blocking)
@@ -584,6 +675,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang3=',waypoint_ang3_6)
                 print('waypoint3=',waypoint3_6,'\n')
                 print('calc_waypoint3=',project_helper_func.forward_ur3_kin(waypoint_ang3_6),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[20] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[20] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang3_6[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang3_6[1],sim.simx_opmode_blocking)
@@ -607,6 +702,11 @@ while(processed_parts<num_parts):
                 print('waypoint4=',waypoint4,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4),'\n')
 
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[21] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[21] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
+
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4[1],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang4[2],sim.simx_opmode_blocking)
@@ -627,6 +727,11 @@ while(processed_parts<num_parts):
                 print('waypoint_ang4=',waypoint_ang4_1)
                 print('waypoint4=',waypoint4_1,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_1),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[22] = (temp[0][3],temp[1][3],temp[2][3])
+
+
+                return_code,true[22] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_1[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_1[1],sim.simx_opmode_blocking)
@@ -648,6 +753,10 @@ while(processed_parts<num_parts):
                 print('waypoint_ang4=',waypoint_ang4_2)
                 print('waypoint4=',waypoint4_2,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_2),'\n')
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[23] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[23] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_2[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_2[1],sim.simx_opmode_blocking)
@@ -670,6 +779,11 @@ while(processed_parts<num_parts):
                 print('waypoint4=',waypoint4_3,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_3),'\n')
 
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[24] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[24] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
+
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_3[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_3[1],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang4_3[2],sim.simx_opmode_blocking)
@@ -690,6 +804,11 @@ while(processed_parts<num_parts):
                 print('waypoint_ang4=',waypoint_ang4_4)
                 print('waypoint4=',waypoint4_4,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_4),'\n')
+
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[25] = (temp[0][3],temp[1][3],temp[2][3])
+
+                return_code,true[25] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_4[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_4[1],sim.simx_opmode_blocking)
@@ -712,6 +831,12 @@ while(processed_parts<num_parts):
                 print('waypoint4=',waypoint4_5,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_5),'\n')
 
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[26] = (temp[0][3],temp[1][3],temp[2][3])
+
+
+                return_code,true[26] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
+
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_5[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_5[1],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint3,waypoint_ang4_5[2],sim.simx_opmode_blocking)
@@ -732,6 +857,12 @@ while(processed_parts<num_parts):
                 print('waypoint_ang4=',waypoint_ang4_6)
                 print('waypoint4=',waypoint4_6,'\n')
                 print('calc_waypoint4=',project_helper_func.forward_ur3_kin(waypoint_ang4_6),'\n')
+
+                temp = project_helper_func.forward_ur3_kin(waypoint_ang1)
+                simu[27] = (temp[0][3],temp[1][3],temp[2][3])
+
+
+                return_code,true[27] = sim.simxGetObjectPosition(clientID,Dummy,-1,sim.simx_opmode_blocking)  
 
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint1,waypoint_ang4_6[0],sim.simx_opmode_blocking)
                 return_code = sim.simxSetJointTargetPosition(clientID,UR3_joint2,waypoint_ang4_6[1],sim.simx_opmode_blocking)
@@ -754,9 +885,16 @@ while(processed_parts<num_parts):
         print('in loop')
 
 
+error = np.zeros(28)
+for i in range(28):
+    if(simu[i]==None):
+        break
+    error[i] = np.sqrt((true[i][0]-simu[i][0])**2+ (true[i][1]-simu[i][1])**2 + (true[i][2]-simu[i][2])**2)
 
 
 
+
+print('Error:',error)
 
 
 
